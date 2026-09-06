@@ -73,10 +73,57 @@ function initDiagnosticModal() {
   });
 }
 
+const CHAT_FAQS = [
+  { question: "¿Qué servicios ofrecen?", answer: "Ofrecemos contabilidad y finanzas, servicios tributarios, gestión de nómina, asesoría financiera y organización empresarial. Puedes ver el detalle completo en la sección Servicios de esta página." },
+  { question: "¿Atienden fuera de Santo Domingo?", answer: "Sí, ofrecemos atención presencial y virtual en toda República Dominicana." },
+  { question: "¿Cómo pido el diagnóstico gratis?", answer: "Hacé clic en cualquier botón \"Quiero mi diagnóstico gratis\" de la página, completá tus datos y te contactamos por WhatsApp para coordinarlo." },
+  { question: "¿Trabajan con empresas pequeñas o independientes?", answer: "Sí, trabajamos con negocios de todos los tamaños, incluyendo profesionales independientes y pequeñas empresas." },
+  { question: "¿Cómo los contacto directamente?", answer: "Podés escribirnos por WhatsApp en cualquier momento usando el botón de esta ventana o los que aparecen en toda la página." }
+];
+
+function renderChatMenu() {
+  const body = document.getElementById("chat-body");
+  const optionsHtml = CHAT_FAQS.map((faq, index) => `<button class="chat-option" data-index="${index}">${faq.question}</button>`).join("");
+  body.innerHTML = `
+    <div class="chat-message chat-message-bot">Hola, soy el asistente virtual de Shalom. ¿En qué puedo ayudarte?</div>
+    <div class="chat-options">${optionsHtml}</div>
+  `;
+  body.querySelectorAll(".chat-option").forEach((btn) => {
+    btn.addEventListener("click", () => showChatAnswer(Number(btn.dataset.index)));
+  });
+}
+
+function showChatAnswer(index) {
+  const faq = CHAT_FAQS[index];
+  const body = document.getElementById("chat-body");
+  body.innerHTML = `
+    <div class="chat-message chat-message-user">${faq.question}</div>
+    <div class="chat-message chat-message-bot">${faq.answer}</div>
+    <button class="btn btn-whatsapp chat-handoff" id="chat-handoff-btn" type="button">Continuar por WhatsApp</button>
+    <button class="chat-back" id="chat-back-btn" type="button">&larr; Ver otras preguntas</button>
+  `;
+  document.getElementById("chat-handoff-btn").addEventListener("click", () => {
+    openWhatsApp(`Hola, tengo una pregunta sobre: "${faq.question}"`);
+  });
+  document.getElementById("chat-back-btn").addEventListener("click", renderChatMenu);
+}
+
+function initChatWidget() {
+  const toggle = document.getElementById("chat-toggle");
+  const panel = document.getElementById("chat-panel");
+  const closeBtn = document.getElementById("chat-close");
+  toggle.addEventListener("click", () => {
+    panel.classList.toggle("is-open");
+    if (panel.classList.contains("is-open")) renderChatMenu();
+  });
+  closeBtn.addEventListener("click", () => panel.classList.remove("is-open"));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
   initWhatsAppButtons();
   initFaqAccordion();
   initFooterYear();
   initDiagnosticModal();
+  initChatWidget();
 });
