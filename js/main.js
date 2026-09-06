@@ -1,0 +1,34 @@
+const WHATSAPP_NUMBER = "18494836468";
+
+function openWhatsApp(message) {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank", "noopener");
+}
+
+function initNavToggle() {
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("main-nav");
+  if (!toggle || !nav) return;
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+function initWhatsAppButtons() {
+  const defaultMessage = "Hola, me gustaría más información sobre los servicios de Shalom Financial & Accounting.";
+  document.querySelectorAll("#header-whatsapp-btn, #hero-whatsapp-btn").forEach((btn) => {
+    btn.addEventListener("click", () => openWhatsApp(defaultMessage));
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initNavToggle();
+  initWhatsAppButtons();
+});
