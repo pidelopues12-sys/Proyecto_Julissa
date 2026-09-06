@@ -28,7 +28,18 @@ function initWhatsAppButtons() {
   });
 }
 
+function initFaqAccordion() {
+  document.querySelectorAll(".faq-question").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".faq-item");
+      const isOpen = item.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
   initWhatsAppButtons();
+  initFaqAccordion();
 });
