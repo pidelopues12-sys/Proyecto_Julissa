@@ -43,9 +43,40 @@ function initFooterYear() {
   if (el) el.textContent = new Date().getFullYear();
 }
 
+function openDiagnosticModal() {
+  document.getElementById("diagnostic-modal").classList.add("is-open");
+  document.body.classList.add("modal-open");
+}
+
+function closeDiagnosticModal() {
+  document.getElementById("diagnostic-modal").classList.remove("is-open");
+  document.body.classList.remove("modal-open");
+}
+
+function initDiagnosticModal() {
+  document.querySelectorAll("#hero-diagnostic-btn, #banner-diagnostic-btn").forEach((btn) => {
+    btn.addEventListener("click", openDiagnosticModal);
+  });
+  document.getElementById("diagnostic-modal-close").addEventListener("click", closeDiagnosticModal);
+  document.getElementById("diagnostic-modal").addEventListener("click", (event) => {
+    if (event.target.id === "diagnostic-modal") closeDiagnosticModal();
+  });
+  document.getElementById("diagnostic-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = document.getElementById("diag-name").value.trim();
+    const company = document.getElementById("diag-company").value.trim();
+    const phone = document.getElementById("diag-phone").value.trim();
+    const message = `Hola, soy ${name} de ${company} (tel: ${phone}). Quiero solicitar mi diagnóstico contable gratis.`;
+    openWhatsApp(message);
+    closeDiagnosticModal();
+    event.target.reset();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
   initWhatsAppButtons();
   initFaqAccordion();
   initFooterYear();
+  initDiagnosticModal();
 });
