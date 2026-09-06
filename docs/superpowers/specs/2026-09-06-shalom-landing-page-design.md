@@ -29,7 +29,9 @@ displayed contact number) plus the email and location. The other two flyer
 numbers are omitted from the page since the stakeholder flagged them as
 being replaced.
 
-**Services (6 categories, each with sub-items):**
+**Services (5 categories, each with sub-items — these consolidate the 6
+icons in the flyer's top strip, e.g. "Estados financieros" appears both as
+a top icon and as a sub-item under "Contabilidad y Finanzas"):**
 1. Contabilidad y Finanzas — Contabilidad por iguala, Contabilidad general,
    Organización y revisión contable, Estados financieros
 2. Servicios Tributarios — Declaraciones de impuestos, ITBIS/ISR/ISF,
@@ -76,7 +78,7 @@ profesionalismo, Soluciones a la medida, Compromiso con tu crecimiento.
 2. **Hero** — Julissa's photo, tagline headline, primary CTA ("Quiero mi
    diagnóstico gratis" → opens diagnostic form modal) and secondary CTA
    ("Escríbenos por WhatsApp" → wa.me link).
-3. **Servicios** — 6 service category cards with icons and sub-item lists.
+3. **Servicios** — 5 service category cards with icons and sub-item lists.
 4. **Sobre Julissa** — photo + short bio.
 5. **Diagnóstico gratis** — banner explaining the free-diagnostic offer,
    with the primary CTA repeated.
