@@ -17,6 +17,8 @@
 - FAQ chat widget uses a fixed button menu only — no free-text/keyword matching.
 - Testimonials section must use clearly, visibly marked placeholder content (not just an HTML comment) since no real testimonials exist yet.
 - Language: Spanish (República Dominicana).
+- Testing approach is manual browser verification (per spec), not automated unit/e2e tests — this is a static marketing page with no business logic worth unit testing. Do not treat the absence of a test framework/suite as a spec gap; each task's own "manually verify in a browser" step is its required verification.
+- Footer social links intentionally use `href="#"` placeholders (flagged inline for the stakeholder to fill in with real URLs later) since no real social media URLs were provided — this is expected, not a bug, but is fine to note as a minor/deferred item.
 
 ---
 
