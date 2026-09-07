@@ -49,11 +49,17 @@ h2 { font-size: 2rem; margin-bottom: 32px; text-align: center; }
 .btn:hover { transform: translateY(-3px); }
 .btn:active { transform: translateY(-1px) scale(0.96); transition-duration: 0.1s; }
 
+@keyframes btn-pulse {
+  0%, 100% { box-shadow: 0 6px 16px rgba(201,162,75,0.35); }
+  50% { box-shadow: 0 6px 22px rgba(201,162,75,0.7); }
+}
+
 .btn-primary {
   background: var(--color-gold); color: var(--color-navy-dark);
   box-shadow: 0 6px 16px rgba(201,162,75,0.35);
+  animation: btn-pulse 2.6s ease-in-out infinite;
 }
-.btn-primary:hover { box-shadow: 0 12px 28px rgba(201,162,75,0.45); }
+.btn-primary:hover { box-shadow: 0 12px 28px rgba(201,162,75,0.45); animation-play-state: paused; }
 
 .btn-whatsapp {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -91,47 +97,19 @@ h2 { font-size: 2rem; margin-bottom: 32px; text-align: center; }
 .hero h1 { font-size: 2.4rem; margin-bottom: 16px; }
 .hero-subtitle { font-size: 1.1rem; margin-bottom: 28px; color: #444; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; }
-.hero-photo { width: 100%; max-width: 560px; border-radius: 12px; box-shadow: 0 20px 40px rgba(10,26,60,0.2); display: block; margin: 0 auto; }
+.hero-carousel {
+  position: relative; width: 100%; max-width: 560px; margin: 0 auto;
+  aspect-ratio: 16 / 9; background: var(--color-navy);
+  border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(10,26,60,0.2);
+}
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s var(--ease-smooth); }
+.hero-slide.is-active { opacity: 1; }
+.hero-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 @media (max-width: 860px) {
   .hero-inner { grid-template-columns: 1fr; text-align: center; }
   .hero-actions { justify-content: center; }
   .hero h1 { font-size: 1.8rem; }
-}
-
-/* Gallery */
-.gallery { padding: 72px 0; }
-.gallery-viewport {
-  position: relative; width: 100%; max-width: 900px; margin: 0 auto;
-  aspect-ratio: 16 / 9; background: var(--color-navy);
-  border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(10,26,60,0.2);
-}
-.gallery-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s var(--ease-smooth); pointer-events: none; }
-.gallery-slide.is-active { opacity: 1; pointer-events: auto; }
-.gallery-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.gallery-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 44px; height: 44px; border-radius: 50%; border: none;
-  background: rgba(10,26,60,0.55); color: #fff; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; z-index: 2;
-  transition: background-color 0.2s var(--ease-smooth), transform 0.25s var(--ease-out-back);
-}
-.gallery-arrow:hover { background: rgba(10,26,60,0.85); transform: translateY(-50%) scale(1.1); }
-.gallery-arrow:active { transform: translateY(-50%) scale(0.92); }
-.gallery-arrow svg { width: 22px; height: 22px; }
-.gallery-prev { left: 12px; }
-.gallery-next { right: 12px; }
-.gallery-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-.gallery-dot {
-  width: 10px; height: 10px; border-radius: 50%; border: none; background: #d8d2c4; cursor: pointer; padding: 0;
-  transition: background-color 0.2s var(--ease-smooth), transform 0.25s var(--ease-out-back);
-}
-.gallery-dot.is-active { background: var(--color-gold); transform: scale(1.35); }
-.gallery-dot:hover { background: var(--color-gold-light); transform: scale(1.15); }
-
-@media (max-width: 600px) {
-  .gallery-arrow { width: 36px; height: 36px; }
-  .gallery-arrow svg { width: 18px; height: 18px; }
 }
 
 /* Services */
@@ -175,15 +153,9 @@ h2 { font-size: 2rem; margin-bottom: 32px; text-align: center; }
 .testimonials { padding: 72px 0; background: var(--color-offwhite); }
 .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .testimonial-card { position: relative; background: #fff; border-radius: 12px; padding: 28px; }
+.testimonial-stars { color: var(--color-gold); font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 12px; }
 .testimonial-card p { color: #333; margin-bottom: 12px; font-style: italic; }
 .testimonial-card cite { color: var(--color-navy); font-weight: 600; font-size: 0.9rem; font-style: normal; }
-.testimonial-card.is-placeholder::after {
-  content: "Contenido de ejemplo";
-  position: absolute; top: 12px; right: 12px;
-  background: var(--color-gold); color: var(--color-navy-dark);
-  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-  padding: 4px 8px; border-radius: 4px;
-}
 
 @media (max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr; } }
 
@@ -224,13 +196,19 @@ body.modal-open { overflow: hidden; }
 
 /* Chat widget */
 .chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 300; }
+@keyframes chat-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 .chat-toggle {
   width: 60px; height: 60px; border-radius: 50%; background: var(--color-navy); border: none; cursor: pointer;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center;
   transition: transform 0.25s var(--ease-out-back), box-shadow 0.25s var(--ease-smooth);
+  animation: chat-float 2.4s ease-in-out infinite;
 }
-.chat-toggle:hover { transform: scale(1.08); box-shadow: 0 12px 28px rgba(0,0,0,0.35); }
-.chat-toggle:active { transform: scale(0.94); }
+.chat-toggle:hover { transform: scale(1.08); box-shadow: 0 12px 28px rgba(0,0,0,0.35); animation-play-state: paused; }
+.chat-toggle:active { transform: scale(0.94); animation-play-state: paused; }
 .chat-toggle svg { width: 28px; height: 28px; stroke: var(--color-gold); transition: transform 0.3s var(--ease-out-back); }
 .chat-toggle:hover svg { transform: scale(1.1); }
 .chat-panel { position: absolute; bottom: 76px; right: 0; width: 320px; max-height: 420px; background: #fff; border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); display: none; flex-direction: column; overflow: hidden; }
