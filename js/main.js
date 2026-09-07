@@ -23,7 +23,7 @@ function initNavToggle() {
 
 function initWhatsAppButtons() {
   const defaultMessage = "Hola, me gustaría más información sobre los servicios de Shalom Financial & Accounting.";
-  document.querySelectorAll("#header-whatsapp-btn, #hero-whatsapp-btn").forEach((btn) => {
+  document.querySelectorAll("#hero-whatsapp-btn").forEach((btn) => {
     btn.addEventListener("click", () => openWhatsApp(defaultMessage));
   });
 }
