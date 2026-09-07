@@ -119,6 +119,44 @@ function initChatWidget() {
   closeBtn.addEventListener("click", () => panel.classList.remove("is-open"));
 }
 
+function initGallery() {
+  const viewport = document.getElementById("gallery-viewport");
+  if (!viewport) return;
+  const slides = viewport.querySelectorAll(".gallery-slide");
+  const dots = document.querySelectorAll(".gallery-dot");
+  let current = 0;
+  let autoplayTimer = null;
+
+  function goTo(index) {
+    slides[current].classList.remove("is-active");
+    dots[current].classList.remove("is-active");
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add("is-active");
+    dots[current].classList.add("is-active");
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(next, 5000);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+  }
+
+  document.getElementById("gallery-next").addEventListener("click", () => { next(); startAutoplay(); });
+  document.getElementById("gallery-prev").addEventListener("click", () => { prev(); startAutoplay(); });
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => { goTo(Number(dot.dataset.index)); startAutoplay(); });
+  });
+  viewport.addEventListener("mouseenter", stopAutoplay);
+  viewport.addEventListener("mouseleave", startAutoplay);
+
+  startAutoplay();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
   initWhatsAppButtons();
@@ -126,4 +164,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initFooterYear();
   initDiagnosticModal();
   initChatWidget();
+  initGallery();
 });
