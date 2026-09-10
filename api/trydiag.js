@@ -3,7 +3,7 @@
 import OpenAI from "openai";
 import { buildMessages } from "../lib/diagnostico-core.js";
 
-const apiKey = (process.env.NVIDIA_API_KEY || "")
+const apiKey = (process.env.META_API_KEY || process.env.NVIDIA_API_KEY || "")
   .trim()
   .replace(/^["']+|["']+$/g, "")
   .trim();

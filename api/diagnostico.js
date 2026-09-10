@@ -9,8 +9,9 @@ const BASE_URL = "https://integrate.api.nvidia.com/v1";
 // para evitar valores mal configurados de NVIDIA_MODEL en el entorno.
 const MODEL = "meta/muse-glimmer-30b";
 
-// Limpia comillas/espacios que a veces se cuelan al pegar el valor en el panel.
-const apiKey = (process.env.NVIDIA_API_KEY || "")
+// Lee la key de META_API_KEY o NVIDIA_API_KEY y limpia comillas/espacios que a
+// veces se cuelan al pegar el valor en el panel.
+const apiKey = (process.env.META_API_KEY || process.env.NVIDIA_API_KEY || "")
   .trim()
   .replace(/^["']+|["']+$/g, "")
   .trim();
