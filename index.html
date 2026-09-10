@@ -230,19 +230,9 @@
     </div>
   </section>
   <div class="modal-overlay" id="diagnostic-modal">
-    <div class="modal-box">
+    <div class="modal-box modal-box--wizard">
       <button class="modal-close" id="diagnostic-modal-close" type="button" aria-label="Cerrar">&times;</button>
-      <h3>Solicita tu diagnóstico contable gratis</h3>
-      <p>Cuéntanos un poco sobre tu negocio y te contactamos por WhatsApp para coordinar tu diagnóstico sin costo.</p>
-      <form id="diagnostic-form">
-        <label for="diag-name">Nombre completo</label>
-        <input type="text" id="diag-name" name="name" required>
-        <label for="diag-company">Empresa</label>
-        <input type="text" id="diag-company" name="company" required>
-        <label for="diag-phone">Teléfono</label>
-        <input type="tel" id="diag-phone" name="phone" required>
-        <button type="submit" class="btn btn-primary">Enviar y continuar por WhatsApp</button>
-      </form>
+      <div id="diag-wizard"></div>
     </div>
   </div>
   <div class="chat-widget" id="chat-widget">
@@ -285,5 +275,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/diagnostico.js"></script>
 </body>
 </html>
