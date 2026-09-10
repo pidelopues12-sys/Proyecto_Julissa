@@ -26,14 +26,20 @@ export default async function handler(req, res) {
     res.status(400).json({ error: "pasa ?model=<id>" });
     return;
   }
+  const effort = String(req.query?.effort || "").trim();
   const t0 = Date.now();
   try {
-    const c = await client.chat.completions.create({
+    const params = {
       model,
       messages: buildMessages(SAMPLE),
       temperature: 0.5,
       max_tokens: max,
-    });
+    };
+    if (effort) {
+      params.reasoning_effort = effort;
+      params.chat_template_kwargs = { reasoning_effort: effort };
+    }
+    const c = await client.chat.completions.create(params);
     const msg = c?.choices?.[0]?.message;
     res.status(200).json({
       ok: true, model, ms: Date.now() - t0,
