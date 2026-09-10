@@ -143,7 +143,9 @@ function escapeAttr(str) {
 function buildWhatsappSummary() {
   const c = state.contacto;
   const a = state.answers;
-  return [
+  // WhatsApp usa *texto* para negrita: convertimos los **encabezados**.
+  const diag = String(state.diagnostico || "").replace(/\*\*(.+?)\*\*/g, "*$1*").trim();
+  const lineas = [
     `Hola, soy ${c.nombre} de ${c.empresa}.`,
     `Mi WhatsApp: ${c.whatsapp}`,
     `Generé mi diagnóstico contable en la web y quiero avanzar.`,
@@ -156,7 +158,11 @@ function buildWhatsappSummary() {
     `• NCF: ${a.ncf}`,
     `• Estados financieros: ${a.estados}`,
     `• Preocupación: ${a.preocupacion}`,
-  ].join("\n");
+  ];
+  if (diag) {
+    lineas.push(``, `--- Mi diagnóstico ---`, diag);
+  }
+  return lineas.join("\n");
 }
 
 function renderResult(diagnostico) {
