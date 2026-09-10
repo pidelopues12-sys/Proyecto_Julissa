@@ -237,8 +237,8 @@ async function generarPDF() {
     y += h + 26;
   } catch (e) { /* sin logo si falla la carga */ }
 
-  // Título (serif, como la marca) + subtítulo
-  doc.setFont("times", "bold"); doc.setFontSize(20); doc.setTextColor(...NAVY);
+  // Título + subtítulo (Helvetica: sans limpia, uniforme y legible)
+  doc.setFont("helvetica", "bold"); doc.setFontSize(19); doc.setTextColor(...NAVY);
   doc.text("Shalom Financial & Accounting", pageW / 2, y, { align: "center" }); y += 24;
   doc.setFont("helvetica", "normal"); doc.setFontSize(12); doc.setTextColor(...GOLD);
   doc.text("Diagnóstico contable", pageW / 2, y, { align: "center" }); y += 28;
