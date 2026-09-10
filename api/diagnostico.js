@@ -12,8 +12,11 @@ function resolveBaseURL() {
     .trim();
   if (!raw) return fallback;
   try {
-    new URL(raw);
-    return raw;
+    const u = new URL(raw);
+    // El endpoint OpenAI-compatible vive bajo /v1; si falta, el SDK pega en
+    // una ruta inexistente (404). En ese caso usamos el correcto por defecto.
+    if (!/\/v\d+(\/|$)/.test(u.pathname)) return fallback;
+    return raw.replace(/\/+$/, "");
   } catch {
     return fallback;
   }
