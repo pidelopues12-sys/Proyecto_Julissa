@@ -5,7 +5,7 @@ import { createHandler } from "../lib/diagnostico-handler.js";
 // Base URL y modelo fijos en código para evitar valores mal configurados en
 // el entorno; la API key se lee de GROQ_API_KEY.
 const BASE_URL = "https://api.groq.com/openai/v1";
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = "openai/gpt-oss-20b";
 
 // Limpia comillas/espacios que a veces se cuelan al pegar el valor en el panel.
 const apiKey = (process.env.GROQ_API_KEY || "")
