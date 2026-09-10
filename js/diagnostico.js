@@ -163,6 +163,7 @@ function renderResult(diagnostico) {
   el().innerHTML = `
     <h3 class="diag-title">Tu diagnóstico contable</h3>
     <div class="diag-result">${formatDiagnostico(diagnostico)}</div>
+    <p class="diag-confirm">📱 Te contactaremos por WhatsApp al <strong>${escapeAttr(state.contacto.whatsapp)}</strong>.</p>
     <p class="diag-aviso">${AVISO}</p>
     <button type="button" class="btn btn-whatsapp diag-send" id="diag-send">Enviar mi diagnóstico a Shalom por WhatsApp</button>
     <div class="diag-cta">
