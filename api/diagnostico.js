@@ -6,8 +6,14 @@ import { createHandler } from "../lib/diagnostico-handler.js";
 // por un valor mal configurado de NVIDIA_BASE_URL en el entorno.
 const BASE_URL = "https://integrate.api.nvidia.com/v1";
 
+// Limpia comillas/espacios que a veces se cuelan al pegar el valor en el panel.
+const apiKey = (process.env.NVIDIA_API_KEY || "")
+  .trim()
+  .replace(/^["']+|["']+$/g, "")
+  .trim();
+
 const client = new OpenAI({
-  apiKey: (process.env.NVIDIA_API_KEY || "").trim(),
+  apiKey,
   baseURL: BASE_URL,
 });
 
