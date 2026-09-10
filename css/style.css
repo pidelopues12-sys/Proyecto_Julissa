@@ -197,6 +197,19 @@ h2 { font-size: 2rem; margin-bottom: 32px; text-align: center; }
 
 @media (max-width: 700px) { .footer-inner { grid-template-columns: 1fr; text-align: center; } .social-links { align-items: center; } }
 
+/* Welcome intro (top of page) */
+.welcome-intro { background: var(--color-navy); color: var(--color-white); padding: 72px 0; text-align: center; }
+.welcome-intro-logo { height: 160px; width: auto; margin: 0 auto 24px; display: block; border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+.welcome-intro-name { color: var(--color-gold); font-size: 2.8rem; margin-bottom: 20px; }
+.welcome-intro-message { max-width: 700px; margin: 0 auto; font-size: 1.15rem; line-height: 1.7; color: #d7dcea; }
+
+@media (max-width: 600px) {
+  .welcome-intro { padding: 56px 0; }
+  .welcome-intro-logo { height: 120px; }
+  .welcome-intro-name { font-size: 2rem; }
+  .welcome-intro-message { font-size: 1rem; }
+}
+
 /* Diagnostic modal */
 .modal-overlay { position: fixed; inset: 0; background: rgba(7,18,41,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 200; padding: 24px; }
 .modal-overlay.is-open { opacity: 1; pointer-events: auto; }
