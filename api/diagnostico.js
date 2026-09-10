@@ -7,7 +7,7 @@ import { createHandler } from "../lib/diagnostico-handler.js";
 const BASE_URL = "https://integrate.api.nvidia.com/v1";
 // Modelo rápido (no-razonamiento) para respuesta en segundos. Fijo en código
 // para evitar valores mal configurados de NVIDIA_MODEL en el entorno.
-const MODEL = "meta/llama-3.1-8b-instruct";
+const MODEL = "meta/llama-3.3-70b-instruct";
 
 // Limpia comillas/espacios que a veces se cuelan al pegar el valor en el panel.
 const apiKey = (process.env.NVIDIA_API_KEY || "")
