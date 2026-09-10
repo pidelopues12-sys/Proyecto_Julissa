@@ -231,7 +231,7 @@ async function generarPDF() {
     const img = await loadImage("images/logo.png");
     const w = 64, h = 64;
     doc.addImage(img, "PNG", (pageW - w) / 2, y, w, h);
-    y += h + 14;
+    y += h + 30;
   } catch (e) { /* sin logo si falla la carga */ }
 
   doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(10, 26, 60);
