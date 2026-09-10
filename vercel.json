@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/diagnostico.js": {
+      "maxDuration": 60
+    }
+  }
+}
