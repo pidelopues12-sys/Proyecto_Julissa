@@ -1,0 +1,13 @@
+{
+  "name": "shalom-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test lib/diagnostico-core.test.js lib/diagnostico-handler.test.js"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
