@@ -20,6 +20,18 @@ const SAMPLE = {
 };
 
 export default async function handler(req, res) {
+  if (req.query?.check) {
+    const rawLen = (process.env.NVIDIA_API_KEY || "").length;
+    res.status(200).json({
+      keyPresent: apiKey.length > 0,
+      keyLen: apiKey.length,
+      rawLen,
+      startsWithNvapi: apiKey.startsWith("nvapi-"),
+      prefix: apiKey.slice(0, 6),
+      envKeys: Object.keys(process.env).filter((k) => /NVIDIA/i.test(k)),
+    });
+    return;
+  }
   const model = String(req.query?.model || "").trim();
   const max = Number(req.query?.max || 1024);
   if (!model) {
