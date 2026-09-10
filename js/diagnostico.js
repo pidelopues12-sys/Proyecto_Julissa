@@ -219,50 +219,72 @@ async function generarPDF() {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
-  const margin = 48;
+  const margin = 54;
   const maxW = pageW - margin * 2;
+  const NAVY = [10, 26, 60], GOLD = [201, 162, 75], BODY = [51, 51, 51], GREY = [120, 120, 120];
+  const LH = 15.5; // interlineado del cuerpo
   let y = margin;
 
   const ensure = (needed) => {
-    if (y + needed > pageH - margin) { doc.addPage(); y = margin; }
+    if (y + needed > pageH - 64) { doc.addPage(); y = margin; }
   };
 
+  // Logo
   try {
     const img = await loadImage("images/logo.png");
-    const w = 64, h = 64;
+    const w = 62, h = 62;
     doc.addImage(img, "PNG", (pageW - w) / 2, y, w, h);
-    y += h + 30;
+    y += h + 26;
   } catch (e) { /* sin logo si falla la carga */ }
 
-  doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(10, 26, 60);
-  doc.text("Shalom Financial & Accounting", pageW / 2, y, { align: "center" }); y += 22;
-  doc.setFontSize(13); doc.setTextColor(201, 162, 75);
-  doc.text("Diagnóstico contable", pageW / 2, y, { align: "center" }); y += 24;
+  // Título (serif, como la marca) + subtítulo
+  doc.setFont("times", "bold"); doc.setFontSize(20); doc.setTextColor(...NAVY);
+  doc.text("Shalom Financial & Accounting", pageW / 2, y, { align: "center" }); y += 24;
+  doc.setFont("helvetica", "normal"); doc.setFontSize(12); doc.setTextColor(...GOLD);
+  doc.text("Diagnóstico contable", pageW / 2, y, { align: "center" }); y += 28;
 
-  doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(60, 60, 60);
-  doc.text(`${state.contacto.nombre} — ${state.contacto.empresa}`, margin, y); y += 14;
-  doc.text(`WhatsApp: ${state.contacto.whatsapp}`, margin, y); y += 10;
-  doc.setDrawColor(201, 162, 75); doc.line(margin, y, pageW - margin, y); y += 18;
+  // Meta: empresa + fecha (sin nombre de contacto)
+  const fecha = new Date().toLocaleDateString("es-DO", { day: "2-digit", month: "long", year: "numeric" });
+  doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(...NAVY);
+  doc.text(`Preparado para: ${state.contacto.empresa}`, margin, y); y += 15;
+  doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor(...GREY);
+  doc.text(fecha, margin, y); y += 12;
+  doc.setDrawColor(...GOLD); doc.setLineWidth(1); doc.line(margin, y, pageW - margin, y); y += 22;
 
+  // Cuerpo del diagnóstico (línea por línea para espaciado uniforme)
   const lines = String(state.diagnostico || "").split("\n");
-  doc.setFontSize(11);
   for (const raw of lines) {
     const line = raw.trim();
-    if (!line) { y += 6; continue; }
+    if (!line) { y += 7; continue; }
     const bold = line.match(/^\*\*(.+?)\*\*:?$/);
-    const text = bold ? bold[1] : line.replace(/\*\*(.+?)\*\*/g, "$1").replace(/^[•\-]\s*/, "• ");
-    doc.setFont("helvetica", bold ? "bold" : "normal");
-    doc.setTextColor(bold ? 10 : 40, bold ? 26 : 40, bold ? 60 : 40);
-    const wrapped = doc.splitTextToSize(text, maxW);
-    ensure(wrapped.length * 15 + (bold ? 6 : 0));
-    if (bold) y += 6;
-    doc.text(wrapped, margin, y);
-    y += wrapped.length * 15;
+    if (bold) {
+      doc.setFont("helvetica", "bold"); doc.setFontSize(12); doc.setTextColor(...NAVY);
+      y += 8;
+      for (const wl of doc.splitTextToSize(bold[1], maxW)) { ensure(LH); doc.text(wl, margin, y); y += LH + 1; }
+      y += 2;
+    } else {
+      doc.setFont("helvetica", "normal"); doc.setFontSize(10.5); doc.setTextColor(...BODY);
+      const text = line.replace(/\*\*(.+?)\*\*/g, "$1").replace(/^[•\-]\s*/, "•  ");
+      for (const wl of doc.splitTextToSize(text, maxW)) { ensure(LH); doc.text(wl, margin, y); y += LH; }
+    }
   }
 
-  y += 14; ensure(40);
-  doc.setFont("helvetica", "italic"); doc.setFontSize(8); doc.setTextColor(120, 120, 120);
-  doc.text(doc.splitTextToSize(AVISO, maxW), margin, y);
+  // Aviso legal
+  y += 16; ensure(40);
+  doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.5); doc.line(margin, y, pageW - margin, y); y += 14;
+  doc.setFont("helvetica", "italic"); doc.setFontSize(8); doc.setTextColor(...GREY);
+  for (const wl of doc.splitTextToSize(AVISO, maxW)) { ensure(11); doc.text(wl, margin, y); y += 11; }
+
+  // Pie de página en todas las páginas
+  const total = doc.getNumberOfPages();
+  for (let p = 1; p <= total; p++) {
+    doc.setPage(p);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(8); doc.setTextColor(...GREY);
+    doc.text(
+      "Shalom Financial & Accounting  ·  WhatsApp +1 849-483-6468  ·  financialshalom51@gmail.com",
+      pageW / 2, pageH - 30, { align: "center" }
+    );
+  }
 
   const empresa = (state.contacto.empresa || "diagnostico").replace(/[^\w\-]+/g, "_").slice(0, 40);
   doc.save(`Diagnostico-Shalom-${empresa}.pdf`);
