@@ -160,20 +160,25 @@ function buildWhatsappSummary() {
 }
 
 function renderResult(diagnostico) {
+  state.diagnostico = diagnostico;
   el().innerHTML = `
     <h3 class="diag-title">Tu diagnóstico contable</h3>
     <div class="diag-result">${formatDiagnostico(diagnostico)}</div>
     <p class="diag-confirm">📱 Te contactaremos por WhatsApp al <strong>${escapeAttr(state.contacto.whatsapp)}</strong>.</p>
     <p class="diag-aviso">${AVISO}</p>
-    <button type="button" class="btn btn-whatsapp diag-send" id="diag-send">Enviar mi diagnóstico a Shalom por WhatsApp</button>
+    <div class="diag-actions">
+      <button type="button" class="btn btn-whatsapp diag-send" id="diag-send">Enviar mi diagnóstico por WhatsApp</button>
+      <button type="button" class="btn btn-whatsapp-outline diag-pdf" id="diag-pdf">Descargar diagnóstico en PDF</button>
+    </div>
     <div class="diag-cta">
-      <h4>Agenda tu asesoría con Julissa y su equipo</h4>
+      <h4>Agenda tu asesoría con nuestro equipo de Shalom Financial &amp; Accounting</h4>
       <p>Da el siguiente paso: te ayudamos a ordenar y hacer crecer tu negocio.</p>
       <button type="button" class="btn btn-primary" id="diag-asesoria">Quiero mi asesoría</button>
     </div>`;
   document.getElementById("diag-send").addEventListener("click", () => openWhatsApp(buildWhatsappSummary()));
+  document.getElementById("diag-pdf").addEventListener("click", generarPDF);
   document.getElementById("diag-asesoria").addEventListener("click", () =>
-    openWhatsApp(`Hola, soy ${state.contacto.nombre} de ${state.contacto.empresa}. Quiero agendar una asesoría con Julissa y su equipo.`)
+    openWhatsApp(`Hola, soy ${state.contacto.nombre} de ${state.contacto.empresa}. Quiero agendar una asesoría con el equipo de Shalom Financial & Accounting.`)
   );
 }
 
@@ -185,6 +190,77 @@ function renderError() {
     <button type="button" class="diag-back" id="diag-retry">← Intentar de nuevo</button>`;
   document.getElementById("diag-send").addEventListener("click", () => openWhatsApp(buildWhatsappSummary()));
   document.getElementById("diag-retry").addEventListener("click", () => { state.step = DIAG_QUESTIONS.length; renderStep(); });
+}
+
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+async function generarPDF() {
+  const btn = document.getElementById("diag-pdf");
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    if (btn) btn.textContent = "PDF no disponible, intenta de nuevo";
+    return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = "Generando PDF…"; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 48;
+  const maxW = pageW - margin * 2;
+  let y = margin;
+
+  const ensure = (needed) => {
+    if (y + needed > pageH - margin) { doc.addPage(); y = margin; }
+  };
+
+  try {
+    const img = await loadImage("images/logo.png");
+    const w = 64, h = 64;
+    doc.addImage(img, "PNG", (pageW - w) / 2, y, w, h);
+    y += h + 14;
+  } catch (e) { /* sin logo si falla la carga */ }
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(18); doc.setTextColor(10, 26, 60);
+  doc.text("Shalom Financial & Accounting", pageW / 2, y, { align: "center" }); y += 22;
+  doc.setFontSize(13); doc.setTextColor(201, 162, 75);
+  doc.text("Diagnóstico contable", pageW / 2, y, { align: "center" }); y += 24;
+
+  doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(60, 60, 60);
+  doc.text(`${state.contacto.nombre} — ${state.contacto.empresa}`, margin, y); y += 14;
+  doc.text(`WhatsApp: ${state.contacto.whatsapp}`, margin, y); y += 10;
+  doc.setDrawColor(201, 162, 75); doc.line(margin, y, pageW - margin, y); y += 18;
+
+  const lines = String(state.diagnostico || "").split("\n");
+  doc.setFontSize(11);
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { y += 6; continue; }
+    const bold = line.match(/^\*\*(.+?)\*\*:?$/);
+    const text = bold ? bold[1] : line.replace(/\*\*(.+?)\*\*/g, "$1").replace(/^[•\-]\s*/, "• ");
+    doc.setFont("helvetica", bold ? "bold" : "normal");
+    doc.setTextColor(bold ? 10 : 40, bold ? 26 : 40, bold ? 60 : 40);
+    const wrapped = doc.splitTextToSize(text, maxW);
+    ensure(wrapped.length * 15 + (bold ? 6 : 0));
+    if (bold) y += 6;
+    doc.text(wrapped, margin, y);
+    y += wrapped.length * 15;
+  }
+
+  y += 14; ensure(40);
+  doc.setFont("helvetica", "italic"); doc.setFontSize(8); doc.setTextColor(120, 120, 120);
+  doc.text(doc.splitTextToSize(AVISO, maxW), margin, y);
+
+  const empresa = (state.contacto.empresa || "diagnostico").replace(/[^\w\-]+/g, "_").slice(0, 40);
+  doc.save(`Diagnostico-Shalom-${empresa}.pdf`);
+  if (btn) { btn.disabled = false; btn.textContent = "Descargar diagnóstico en PDF"; }
 }
 
 function initDiagnostico() {

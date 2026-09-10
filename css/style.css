@@ -280,7 +280,9 @@ body.modal-open { overflow: hidden; }
 .diag-result strong { color: var(--color-navy); }
 .diag-confirm { font-size: 0.92rem; color: var(--color-navy); background: var(--color-offwhite); border-radius: 8px; padding: 10px 12px; margin: 14px 0 6px; }
 .diag-aviso { font-size: 0.78rem; color: #777; margin: 8px 0 18px; }
-.diag-send { width: 100%; margin-bottom: 18px; }
+.diag-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.diag-send, .diag-pdf { width: 100%; }
+.diag-pdf:disabled { opacity: 0.6; cursor: default; }
 .diag-cta { background: var(--color-navy); color: #fff; border-radius: 10px; padding: 20px; text-align: center; }
 .diag-cta h4 { color: var(--color-gold); font-family: var(--font-body); margin-bottom: 8px; }
 .diag-cta p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 14px; }
