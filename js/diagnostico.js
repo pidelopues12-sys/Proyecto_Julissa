@@ -145,6 +145,7 @@ function buildWhatsappSummary() {
   const a = state.answers;
   return [
     `Hola, soy ${c.nombre} de ${c.empresa}.`,
+    `Mi WhatsApp: ${c.whatsapp}`,
     `Generé mi diagnóstico contable en la web y quiero avanzar.`,
     ``,
     `Mis respuestas:`,
