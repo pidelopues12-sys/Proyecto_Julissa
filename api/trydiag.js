@@ -21,14 +21,20 @@ const SAMPLE = {
 
 export default async function handler(req, res) {
   if (req.query?.check) {
-    const rawLen = (process.env.NVIDIA_API_KEY || "").length;
+    const metaKey = (process.env.META_API_KEY || "").trim().replace(/^["']+|["']+$/g, "").trim();
     res.status(200).json({
-      keyPresent: apiKey.length > 0,
-      keyLen: apiKey.length,
-      rawLen,
-      startsWithNvapi: apiKey.startsWith("nvapi-"),
-      prefix: apiKey.slice(0, 6),
-      envKeys: Object.keys(process.env).filter((k) => /NVIDIA/i.test(k)),
+      nvidia: {
+        keyPresent: apiKey.length > 0,
+        keyLen: apiKey.length,
+      },
+      meta: {
+        keyPresent: metaKey.length > 0,
+        keyLen: metaKey.length,
+        keyPrefix: metaKey.slice(0, 6),
+        baseUrl: process.env.META_BASE_URL || null,
+        model: process.env.META_MODEL || null,
+      },
+      envKeys: Object.keys(process.env).filter((k) => /NVIDIA|META/i.test(k)),
     });
     return;
   }
