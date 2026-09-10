@@ -61,11 +61,11 @@ function renderContact() {
     <h3 class="diag-title">¿A dónde te enviamos el seguimiento?</h3>
     <form id="diag-contact-form" class="diag-contact">
       <label for="diag-nombre">Nombre completo</label>
-      <input type="text" id="diag-nombre" required maxlength="120" value="${state.contacto.nombre}">
+      <input type="text" id="diag-nombre" required maxlength="120" value="${escapeAttr(state.contacto.nombre)}">
       <label for="diag-empresa">Empresa</label>
-      <input type="text" id="diag-empresa" required maxlength="120" value="${state.contacto.empresa}">
+      <input type="text" id="diag-empresa" required maxlength="120" value="${escapeAttr(state.contacto.empresa)}">
       <label for="diag-whatsapp">WhatsApp</label>
-      <input type="tel" id="diag-whatsapp" required maxlength="120" value="${state.contacto.whatsapp}">
+      <input type="tel" id="diag-whatsapp" required maxlength="120" value="${escapeAttr(state.contacto.whatsapp)}">
       <p class="diag-error" id="diag-error" hidden></p>
       <div class="diag-nav">
         <button type="button" class="diag-back" id="diag-back">← Atrás</button>
@@ -129,6 +129,15 @@ function formatDiagnostico(texto) {
   return escaped
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\n/g, "<br>");
+}
+
+function escapeAttr(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function buildWhatsappSummary() {
