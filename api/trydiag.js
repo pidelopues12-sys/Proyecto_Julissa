@@ -3,12 +3,12 @@
 import OpenAI from "openai";
 import { buildMessages } from "../lib/diagnostico-core.js";
 
-const apiKey = (process.env.META_API_KEY || process.env.NVIDIA_API_KEY || "")
+const apiKey = (process.env.GROQ_API_KEY || "")
   .trim()
   .replace(/^["']+|["']+$/g, "")
   .trim();
 
-const client = new OpenAI({ apiKey, baseURL: "https://integrate.api.nvidia.com/v1" });
+const client = new OpenAI({ apiKey, baseURL: "https://api.groq.com/openai/v1" });
 
 const SAMPLE = {
   contacto: { nombre: "Prueba", empresa: "Prueba SRL", whatsapp: "809" },
@@ -21,20 +21,14 @@ const SAMPLE = {
 
 export default async function handler(req, res) {
   if (req.query?.check) {
-    const metaKey = (process.env.META_API_KEY || "").trim().replace(/^["']+|["']+$/g, "").trim();
     res.status(200).json({
-      nvidia: {
+      groq: {
         keyPresent: apiKey.length > 0,
         keyLen: apiKey.length,
+        keyPrefix: apiKey.slice(0, 4),
+        startsWithGsk: apiKey.startsWith("gsk_"),
       },
-      meta: {
-        keyPresent: metaKey.length > 0,
-        keyLen: metaKey.length,
-        keyPrefix: metaKey.slice(0, 6),
-        baseUrl: process.env.META_BASE_URL || null,
-        model: process.env.META_MODEL || null,
-      },
-      envKeys: Object.keys(process.env).filter((k) => /NVIDIA|META/i.test(k)),
+      envKeys: Object.keys(process.env).filter((k) => /GROQ|NVIDIA|META/i.test(k)),
     });
     return;
   }

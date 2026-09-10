@@ -1,17 +1,14 @@
 import OpenAI from "openai";
 import { createHandler } from "../lib/diagnostico-handler.js";
 
-// El endpoint OpenAI-compatible de NVIDIA es fijo para esta integración.
-// Lo fijamos en código para evitar errores de ruta (404 / "Invalid URL")
-// por un valor mal configurado de NVIDIA_BASE_URL en el entorno.
-const BASE_URL = "https://integrate.api.nvidia.com/v1";
-// Modelo rápido (no-razonamiento) para respuesta en segundos. Fijo en código
-// para evitar valores mal configurados de NVIDIA_MODEL en el entorno.
-const MODEL = "meta/muse-glimmer-30b";
+// Proveedor: Groq (OpenAI-compatible), rápido (~1-3 s) y con buen español.
+// Base URL y modelo fijos en código para evitar valores mal configurados en
+// el entorno; la API key se lee de GROQ_API_KEY.
+const BASE_URL = "https://api.groq.com/openai/v1";
+const MODEL = "llama-3.3-70b-versatile";
 
-// Lee la key de META_API_KEY o NVIDIA_API_KEY y limpia comillas/espacios que a
-// veces se cuelan al pegar el valor en el panel.
-const apiKey = (process.env.META_API_KEY || process.env.NVIDIA_API_KEY || "")
+// Limpia comillas/espacios que a veces se cuelan al pegar el valor en el panel.
+const apiKey = (process.env.GROQ_API_KEY || "")
   .trim()
   .replace(/^["']+|["']+$/g, "")
   .trim();
