@@ -1,6 +1,6 @@
 # Shalom Financial & Accounting Landing Page Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Build and deploy a single-page static marketing site for Shalom Financial & Accounting that captures leads via a free-diagnostic form and direct WhatsApp links.
 
@@ -39,7 +39,7 @@
 - Produces section ids in the DOM already present after this task: `#inicio`.
 - Leaves HTML comments marking insertion points for Tasks 2–7 inside `<main>`.
 
-- [ ] **Step 1: Copy image assets into the project**
+- [x] **Step 1: Copy image assets into the project**
 
 ```bash
 mkdir -p images
@@ -47,7 +47,7 @@ cp "../Logo de Shalom Financial.png" images/logo.png
 cp "../WhatsApp Image 2026-09-06 at 4.38.42 PM.jpeg" images/julissa.jpg
 ```
 
-- [ ] **Step 2: Create `index.html`**
+- [x] **Step 2: Create `index.html`**
 
 ```html
 <!DOCTYPE html>
@@ -114,7 +114,7 @@ cp "../WhatsApp Image 2026-09-06 at 4.38.42 PM.jpeg" images/julissa.jpg
 </html>
 ```
 
-- [ ] **Step 3: Create `css/style.css`**
+- [x] **Step 3: Create `css/style.css`**
 
 ```css
 :root {
@@ -204,7 +204,7 @@ h2 { font-size: 2rem; margin-bottom: 32px; text-align: center; }
 }
 ```
 
-- [ ] **Step 4: Create `js/main.js`**
+- [x] **Step 4: Create `js/main.js`**
 
 ```js
 const WHATSAPP_NUMBER = "18494836468";
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-- [ ] **Step 5: Manually verify in a browser**
+- [x] **Step 5: Manually verify in a browser**
 
 Open `index.html` directly in a browser (double-click or `start index.html` on Windows). Confirm:
 - The navy header is sticky at the top with the Shalom logo visible.
@@ -251,7 +251,7 @@ Open `index.html` directly in a browser (double-click or `start index.html` on W
 - The hero shows the headline, subtitle, both buttons, and Julissa's photo.
 - Clicking "Escríbenos por WhatsApp" (header or hero) opens a new tab to `https://wa.me/18494836468?text=...` with the default message.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add images index.html css js
@@ -270,7 +270,7 @@ git commit -m "Scaffold landing page: base styles, header, hero"
 - Consumes: `.container`, `.btn` and CSS variables from Task 1.
 - Produces: section `#servicios` (nav link from Task 1 now resolves).
 
-- [ ] **Step 1: Replace the `<!-- TASK2:SERVICIOS -->` marker in `index.html` with:**
+- [x] **Step 1: Replace the `<!-- TASK2:SERVICIOS -->` marker in `index.html` with:**
 
 ```html
 <section class="services" id="servicios">
@@ -331,7 +331,7 @@ git commit -m "Scaffold landing page: base styles, header, hero"
 </section>
 ```
 
-- [ ] **Step 2: Append to `css/style.css`**
+- [x] **Step 2: Append to `css/style.css`**
 
 ```css
 /* Services */
@@ -349,11 +349,11 @@ git commit -m "Scaffold landing page: base styles, header, hero"
 @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
 ```
 
-- [ ] **Step 3: Manually verify in a browser**
+- [x] **Step 3: Manually verify in a browser**
 
 Reload `index.html`. Confirm the "Servicios" nav link scrolls to a grid of 5 cards, each with an icon, title, and bullet list; grid collapses to 2 then 1 column as the window narrows.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html css/style.css
@@ -372,7 +372,7 @@ git commit -m "Add servicios section"
 - Produces: sections `#sobre-julissa`, `#diagnostico`, `#por-que-elegirnos`.
 - Produces: button `#banner-diagnostic-btn` — Task 6 wires this (and `#hero-diagnostic-btn` from Task 1) to open the diagnostic modal. No click handler is attached in this task.
 
-- [ ] **Step 1: Replace the `<!-- TASK3:SOBRE_JULISSA_DIAGNOSTICO_PORQUE -->` marker with:**
+- [x] **Step 1: Replace the `<!-- TASK3:SOBRE_JULISSA_DIAGNOSTICO_PORQUE -->` marker with:**
 
 ```html
 <section class="about" id="sobre-julissa">
@@ -408,7 +408,7 @@ git commit -m "Add servicios section"
 </section>
 ```
 
-- [ ] **Step 2: Append to `css/style.css`**
+- [x] **Step 2: Append to `css/style.css`**
 
 ```css
 /* About */
@@ -433,11 +433,11 @@ git commit -m "Add servicios section"
 @media (max-width: 860px) { .why-us-grid { grid-template-columns: 1fr; } }
 ```
 
-- [ ] **Step 3: Manually verify in a browser**
+- [x] **Step 3: Manually verify in a browser**
 
 Reload. Confirm "Sobre Julissa" shows her photo and bio, the navy diagnostic banner shows the offer and a button (not yet clickable/functional — that's Task 6), and "Por qué elegirnos" shows 5 checkmarked items.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html css/style.css
@@ -457,7 +457,7 @@ git commit -m "Add sobre-julissa, diagnostico banner, por-que-elegirnos sections
 - Produces: sections `#testimonios`, `#faq`.
 - Produces: `initFaqAccordion()` in `main.js`, called from the `DOMContentLoaded` listener.
 
-- [ ] **Step 1: Replace the `<!-- TASK4:TESTIMONIOS_FAQ -->` marker with:**
+- [x] **Step 1: Replace the `<!-- TASK4:TESTIMONIOS_FAQ -->` marker with:**
 
 ```html
 <section class="testimonials" id="testimonios">
@@ -509,7 +509,7 @@ git commit -m "Add sobre-julissa, diagnostico banner, por-que-elegirnos sections
 </section>
 ```
 
-- [ ] **Step 2: Append to `css/style.css`**
+- [x] **Step 2: Append to `css/style.css`**
 
 ```css
 /* Testimonials */
@@ -538,7 +538,7 @@ git commit -m "Add sobre-julissa, diagnostico banner, por-que-elegirnos sections
 .faq-answer p { padding-bottom: 18px; color: #444; }
 ```
 
-- [ ] **Step 3: Add to `js/main.js`**
+- [x] **Step 3: Add to `js/main.js`**
 
 ```js
 function initFaqAccordion() {
@@ -562,11 +562,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-- [ ] **Step 4: Manually verify in a browser**
+- [x] **Step 4: Manually verify in a browser**
 
 Reload. Confirm 3 testimonial cards each show a small "Contenido de ejemplo" gold badge in the corner. In the FAQ section, clicking a question expands its answer and rotates/reveals it; clicking again collapses it.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add index.html css/style.css js/main.js
@@ -585,7 +585,7 @@ git commit -m "Add testimonios placeholder and FAQ accordion"
 **Interfaces:**
 - Produces: section `#contacto` (as a `<footer>`).
 
-- [ ] **Step 1: Replace the `<!-- TASK5:FOOTER -->` marker (right after `</main>`, before the `<script>` tag) with:**
+- [x] **Step 1: Replace the `<!-- TASK5:FOOTER -->` marker (right after `</main>`, before the `<script>` tag) with:**
 
 ```html
 <footer class="site-footer" id="contacto">
@@ -614,7 +614,7 @@ git commit -m "Add testimonios placeholder and FAQ accordion"
 </footer>
 ```
 
-- [ ] **Step 2: Append to `css/style.css`**
+- [x] **Step 2: Append to `css/style.css`**
 
 ```css
 /* Footer */
@@ -632,7 +632,7 @@ git commit -m "Add testimonios placeholder and FAQ accordion"
 @media (max-width: 700px) { .footer-inner { grid-template-columns: 1fr; text-align: center; } .social-links { align-items: center; } }
 ```
 
-- [ ] **Step 3: Add to `js/main.js`**
+- [x] **Step 3: Add to `js/main.js`**
 
 ```js
 function initFooterYear() {
@@ -652,11 +652,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-- [ ] **Step 4: Manually verify in a browser**
+- [x] **Step 4: Manually verify in a browser**
 
 Reload. Confirm the footer shows the logo, tagline, WhatsApp/email/location, social placeholder links, and the current year in the copyright line. Clicking "Contacto" in the nav scrolls here.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add index.html css/style.css js/main.js
@@ -676,7 +676,7 @@ git commit -m "Add footer/contact section"
 - Consumes: `openWhatsApp(message)` from Task 1; buttons `#hero-diagnostic-btn` (Task 1) and `#banner-diagnostic-btn` (Task 3), previously inert.
 - Produces: `openDiagnosticModal()`, `closeDiagnosticModal()`, `initDiagnosticModal()` in `main.js`.
 
-- [ ] **Step 1: Replace the `<!-- TASK6:DIAGNOSTIC_MODAL -->` marker (inside `<main>`, after the other sections) with:**
+- [x] **Step 1: Replace the `<!-- TASK6:DIAGNOSTIC_MODAL -->` marker (inside `<main>`, after the other sections) with:**
 
 ```html
 <div class="modal-overlay" id="diagnostic-modal">
@@ -697,7 +697,7 @@ git commit -m "Add footer/contact section"
 </div>
 ```
 
-- [ ] **Step 2: Append to `css/style.css`**
+- [x] **Step 2: Append to `css/style.css`**
 
 ```css
 /* Diagnostic modal */
@@ -713,7 +713,7 @@ git commit -m "Add footer/contact section"
 body.modal-open { overflow: hidden; }
 ```
 
-- [ ] **Step 3: Add to `js/main.js`**
+- [x] **Step 3: Add to `js/main.js`**
 
 ```js
 function openDiagnosticModal() {
@@ -759,11 +759,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-- [ ] **Step 4: Manually verify in a browser**
+- [x] **Step 4: Manually verify in a browser**
 
 Reload. Click "Quiero mi diagnóstico gratis" in the hero — the modal opens. Click the backdrop or the × — it closes. Reopen, fill in Nombre/Empresa/Teléfono, submit — confirm a new tab opens to `https://wa.me/18494836468?text=...` containing the name, company, and phone in the message, and that the modal closes and the form resets. Repeat by opening the modal via the diagnostic banner's button.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add index.html css/style.css js/main.js
@@ -783,7 +783,7 @@ git commit -m "Add diagnostic modal with WhatsApp handoff"
 - Consumes: `openWhatsApp(message)` from Task 1.
 - Produces: `CHAT_FAQS` array, `renderChatMenu()`, `showChatAnswer(index)`, `initChatWidget()` in `main.js`.
 
-- [ ] **Step 1: Replace the `<!-- TASK7:CHAT_WIDGET -->` marker (inside `<main>`, last section) with:**
+- [x] **Step 1: Replace the `<!-- TASK7:CHAT_WIDGET -->` marker (inside `<main>`, last section) with:**
 
 ```html
 <div class="chat-widget" id="chat-widget">
@@ -800,7 +800,7 @@ git commit -m "Add diagnostic modal with WhatsApp handoff"
 </div>
 ```
 
-- [ ] **Step 2: Append to `css/style.css`**
+- [x] **Step 2: Append to `css/style.css`**
 
 ```css
 /* Chat widget */
@@ -824,7 +824,7 @@ git commit -m "Add diagnostic modal with WhatsApp handoff"
 @media (max-width: 480px) { .chat-panel { width: calc(100vw - 32px); right: -8px; } }
 ```
 
-- [ ] **Step 3: Add to `js/main.js`**
+- [x] **Step 3: Add to `js/main.js`**
 
 ```js
 const CHAT_FAQS = [
@@ -887,11 +887,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-- [ ] **Step 4: Manually verify in a browser**
+- [x] **Step 4: Manually verify in a browser**
 
 Reload. Click the floating chat bubble bottom-right — a panel opens showing a greeting and 5 question buttons. Click one — it shows the question, the canned answer, a "Continuar por WhatsApp" button, and a "Ver otras preguntas" link. Click the handoff button — confirm a new tab opens to `wa.me` with the question referenced in the message. Click "Ver otras preguntas" — confirm it returns to the menu. Click the × — confirm the panel closes.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add index.html css/style.css js/main.js
@@ -908,7 +908,7 @@ git commit -m "Add floating FAQ chat widget"
 
 **Interfaces:** None (polish/bugfix task; no new interfaces).
 
-- [ ] **Step 1: Resize the browser window (or use device toolbar) to test at ~375px (mobile), ~768px (tablet), and ~1280px (desktop) widths**
+- [x] **Step 1: Resize the browser window (or use device toolbar) to test at ~375px (mobile), ~768px (tablet), and ~1280px (desktop) widths**
 
 Check at each width:
 - Header: logo + hamburger fit without overlap on mobile; nav collapses/expands correctly.
@@ -919,11 +919,11 @@ Check at each width:
 - Chat panel: doesn't overflow the viewport edge on narrow screens (uses the `@media (max-width: 480px)` rule from Task 7).
 - Footer: columns stack on mobile and stay centered.
 
-- [ ] **Step 2: Fix any overflow, spacing, or alignment issues found**
+- [x] **Step 2: Fix any overflow, spacing, or alignment issues found**
 
 Apply targeted CSS fixes directly in `css/style.css` near the relevant existing rules (e.g., adjust a `@media` breakpoint value, add `overflow-x: hidden` to `body` if any horizontal scroll is found, adjust `.hero-photo` `max-width` on very small screens). Document what was changed in the commit message.
 
-- [ ] **Step 3: Run the full functional checklist end-to-end once more**
+- [x] **Step 3: Run the full functional checklist end-to-end once more**
 
 - Every nav link scrolls to the correct section without being hidden under the sticky header.
 - Every WhatsApp-triggering control (header button, hero secondary button, diagnostic form, chat handoff) opens `https://wa.me/18494836468` with an appropriate pre-filled message.
@@ -931,7 +931,7 @@ Apply targeted CSS fixes directly in `css/style.css` near the relevant existing 
 - Testimonials are visibly marked as example content.
 - No console errors in the browser dev tools on page load or after interacting with the modal, accordion, and chat widget.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html css/style.css
@@ -946,20 +946,20 @@ git commit -m "Responsive polish and QA fixes"
 
 **Interfaces:** None.
 
-- [ ] **Step 1: Deploy via Netlify CLI**
+- [x] **Step 1: Deploy via Netlify CLI**
 
 ```bash
 npx netlify-cli deploy --dir=. --prod
 ```
 
-- [ ] **Step 2: Handle authentication if prompted**
+- [x] **Step 2: Handle authentication if prompted**
 
 If the command prints a login URL because the machine isn't yet authenticated with Netlify, stop and hand the URL to the user to complete login in their own browser (this is their Netlify account — do not attempt to log in on their behalf). Once they confirm login is complete, re-run the Step 1 command.
 
-- [ ] **Step 3: Confirm the deployment**
+- [x] **Step 3: Confirm the deployment**
 
 The CLI prints a live production URL on success. Open it in a browser and re-run the functional checklist from Task 8 Step 3 against the deployed URL (not just the local file) to confirm WhatsApp links, the modal, the accordion, and the chat widget all work identically in production.
 
-- [ ] **Step 4: Share the URL**
+- [x] **Step 4: Share the URL**
 
 Report the final production URL back to the user.

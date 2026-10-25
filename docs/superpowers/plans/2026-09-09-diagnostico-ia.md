@@ -1,6 +1,6 @@
 # Diagnóstico contable con IA — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Añadir un diagnóstico contable automatizado con IA a la landing de Shalom: el visitante completa un wizard, un backend serverless en Vercel llama al endpoint NVIDIA (gpt-oss-20b) y devuelve un diagnóstico personalizado que se muestra en pantalla, con entrega por WhatsApp y CTA de asesoría.
 
@@ -51,7 +51,7 @@
   - `buildMessages(body) -> Array<{ role: "system"|"user", content: string }>`
   - Forma de `body`: `{ contacto: { nombre, empresa, whatsapp }, respuestas: { tipoNegocio, empleados, contabilidad, dgii, ncf, estados, preocupacion } }` (todos strings).
 
-- [ ] **Step 1: Crear `package.json`**
+- [x] **Step 1: Crear `package.json`**
 
 ```json
 {
@@ -69,12 +69,12 @@
 }
 ```
 
-- [ ] **Step 2: Instalar dependencias**
+- [x] **Step 2: Instalar dependencias**
 
 Run: `npm install`
 Expected: crea `node_modules/` y `package-lock.json` sin errores. (`node_modules/` ya está en `.gitignore`.)
 
-- [ ] **Step 3: Escribir las pruebas (deben fallar)**
+- [x] **Step 3: Escribir las pruebas (deben fallar)**
 
 Create `lib/diagnostico-core.test.js`:
 
@@ -124,12 +124,12 @@ test("buildMessages arma system + user con los datos", () => {
 });
 ```
 
-- [ ] **Step 4: Correr las pruebas (verificar que fallan)**
+- [x] **Step 4: Correr las pruebas (verificar que fallan)**
 
 Run: `npm test`
 Expected: FAIL — no existe `./diagnostico-core.js`.
 
-- [ ] **Step 5: Implementar `lib/diagnostico-core.js`**
+- [x] **Step 5: Implementar `lib/diagnostico-core.js`**
 
 ```javascript
 // Lógica pura del diagnóstico: validación de entrada y construcción del prompt.
@@ -206,12 +206,12 @@ export function buildMessages(body) {
 }
 ```
 
-- [ ] **Step 6: Correr las pruebas (verificar que pasan)**
+- [x] **Step 6: Correr las pruebas (verificar que pasan)**
 
 Run: `npm test`
 Expected: PASS (5 pruebas de core).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add package.json package-lock.json lib/diagnostico-core.js lib/diagnostico-core.test.js
@@ -234,7 +234,7 @@ git commit -m "feat(diagnostico): lógica pura de validación y prompt con prueb
   - `client` debe tener `client.chat.completions.create({ model, messages, temperature, max_tokens }) -> { choices: [{ message: { content } }] }`.
   - Respuestas HTTP: `405` (no POST), `400` (validación), `200 { diagnostico }`, `502 { error }`.
 
-- [ ] **Step 1: Escribir las pruebas del handler (deben fallar)**
+- [x] **Step 1: Escribir las pruebas del handler (deben fallar)**
 
 Create `lib/diagnostico-handler.test.js`:
 
@@ -302,12 +302,12 @@ test("responde 502 si la IA lanza error", async () => {
 });
 ```
 
-- [ ] **Step 2: Correr las pruebas (verificar que fallan)**
+- [x] **Step 2: Correr las pruebas (verificar que fallan)**
 
 Run: `npm test`
 Expected: FAIL — no existe `./diagnostico-handler.js`.
 
-- [ ] **Step 3: Implementar `lib/diagnostico-handler.js`**
+- [x] **Step 3: Implementar `lib/diagnostico-handler.js`**
 
 ```javascript
 import { validateInput, buildMessages } from "./diagnostico-core.js";
@@ -342,12 +342,12 @@ export function createHandler(client, options = {}) {
 }
 ```
 
-- [ ] **Step 4: Correr las pruebas (verificar que pasan)**
+- [x] **Step 4: Correr las pruebas (verificar que pasan)**
 
 Run: `npm test`
 Expected: PASS (5 core + 5 handler = 10).
 
-- [ ] **Step 5: Crear el endpoint `api/diagnostico.js`**
+- [x] **Step 5: Crear el endpoint `api/diagnostico.js`**
 
 ```javascript
 import OpenAI from "openai";
@@ -361,7 +361,7 @@ const client = new OpenAI({
 export default createHandler(client);
 ```
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add lib/diagnostico-handler.js lib/diagnostico-handler.test.js api/diagnostico.js
@@ -382,7 +382,7 @@ git commit -m "feat(diagnostico): handler serverless + endpoint /api/diagnostico
 - Consumes: globales `openWhatsApp(message)` y `WHATSAPP_NUMBER` definidos en `js/main.js`; endpoint `POST /api/diagnostico` de Task 2.
 - Produces: `initDiagnostico()` (auto-invocada en `DOMContentLoaded`); rellena `#diag-wizard` dentro de `#diagnostic-modal`.
 
-- [ ] **Step 1: Reemplazar el contenido del modal en `index.html`**
+- [x] **Step 1: Reemplazar el contenido del modal en `index.html`**
 
 Buscar el bloque actual del modal (`<div class="modal-overlay" id="diagnostic-modal"> ... </div>`) y reemplazarlo por:
 
@@ -395,7 +395,7 @@ Buscar el bloque actual del modal (`<div class="modal-overlay" id="diagnostic-mo
   </div>
 ```
 
-- [ ] **Step 2: Incluir el nuevo script en `index.html`**
+- [x] **Step 2: Incluir el nuevo script en `index.html`**
 
 Reemplazar `<script src="js/main.js"></script>` por:
 
@@ -404,7 +404,7 @@ Reemplazar `<script src="js/main.js"></script>` por:
 <script src="js/diagnostico.js"></script>
 ```
 
-- [ ] **Step 3: Quitar el manejador viejo en `js/main.js`**
+- [x] **Step 3: Quitar el manejador viejo en `js/main.js`**
 
 Eliminar la función `initDiagnosticModal` completa (líneas de `function openDiagnosticModal()` hasta el cierre de `initDiagnosticModal`) y la llamada `initDiagnosticModal();` dentro de `DOMContentLoaded`. Mantener `openWhatsApp`, `WHATSAPP_NUMBER` y el resto. El bloque final debe quedar así:
 
@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-- [ ] **Step 4: Crear `js/diagnostico.js`**
+- [x] **Step 4: Crear `js/diagnostico.js`**
 
 ```javascript
 // Wizard del diagnóstico contable con IA. Se apoya en los globales
@@ -613,7 +613,7 @@ function initDiagnostico() {
 document.addEventListener("DOMContentLoaded", initDiagnostico);
 ```
 
-- [ ] **Step 5: Añadir estilos en `css/style.css`**
+- [x] **Step 5: Añadir estilos en `css/style.css`**
 
 Agregar al final del archivo:
 
@@ -643,7 +643,7 @@ Agregar al final del archivo:
 .diag-cta p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 14px; }
 ```
 
-- [ ] **Step 6: Prueba local del frontend con backend (vercel dev)**
+- [x] **Step 6: Prueba local del frontend con backend (vercel dev)**
 
 Run: `npx vercel dev` (requiere el proyecto vinculado a Vercel; ver Task 5). Con las variables de entorno disponibles en el shell:
 ```bash
@@ -651,7 +651,7 @@ NVIDIA_API_KEY=xxx NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1 NVIDIA_MO
 ```
 Expected: abrir `http://localhost:3000`, clic en "Quiero mi diagnóstico gratis", recorrer las 7 preguntas + contacto, "Generar diagnóstico" → aparece el diagnóstico + aviso + botón WhatsApp + CTA. Si el backend/env no está, debe verse el estado de error con salida por WhatsApp (valida la ruta de error).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add index.html css/style.css js/main.js js/diagnostico.js
@@ -668,7 +668,7 @@ git commit -m "feat(diagnostico): wizard frontend, resultado, WhatsApp y CTA de 
 **Interfaces:**
 - Consumes: `api/diagnostico.js`, `package.json`, y las variables `NVIDIA_API_KEY`, `NVIDIA_BASE_URL`, `NVIDIA_MODEL`.
 
-- [ ] **Step 1: Documentar el despliegue en `README-deploy.md`**
+- [x] **Step 1: Documentar el despliegue en `README-deploy.md`**
 
 ```markdown
 # Despliegue en Vercel — Diagnóstico con IA
@@ -696,21 +696,21 @@ Definirlas para Production y Preview. NO subir `.env` a git (ya está ignorado).
 3. Probar `POST /api/diagnostico` con un cuerpo válido y uno inválido (400).
 ```
 
-- [ ] **Step 2: Registrar las variables de entorno en Vercel** (acción manual del usuario)
+- [x] **Step 2: Registrar las variables de entorno en Vercel** (acción manual del usuario)
 
 En el panel de Vercel del proyecto, añadir `NVIDIA_API_KEY`, `NVIDIA_BASE_URL`, `NVIDIA_MODEL` (Production + Preview). Confirmar que el proyecto NO está fijado a "prebuilt output" (Framework Preset = Other).
 
-- [ ] **Step 3: Confirmar que las pruebas pasan antes de desplegar**
+- [x] **Step 3: Confirmar que las pruebas pasan antes de desplegar**
 
 Run: `npm test`
 Expected: PASS (10 pruebas).
 
-- [ ] **Step 4: Desplegar un preview y verificar E2E**
+- [x] **Step 4: Desplegar un preview y verificar E2E**
 
 Run: `npx vercel` (deploy de preview)
 Expected: la URL de preview genera un diagnóstico real de extremo a extremo (wizard → IA → resultado → WhatsApp). Verificar también que el resto del sitio sigue igual.
 
-- [ ] **Step 5: Commit y (con aprobación del usuario) push a producción**
+- [x] **Step 5: Commit y (con aprobación del usuario) push a producción**
 
 ```bash
 git add README-deploy.md
