@@ -292,7 +292,7 @@ async function generarPDF() {
 }
 
 function initDiagnostico() {
-  document.querySelectorAll("#hero-diagnostic-btn, #banner-diagnostic-btn").forEach((btn) => {
+  document.querySelectorAll("#hero-diagnostic-btn, #banner-diagnostic-btn, #header-diagnostic-btn").forEach((btn) => {
     btn.addEventListener("click", openModal);
   });
   const closeBtn = document.getElementById("diagnostic-modal-close");

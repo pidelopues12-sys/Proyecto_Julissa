@@ -31,6 +31,14 @@ function initFaqAccordion() {
   });
 }
 
+function initHeaderScroll() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+  const update = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+}
+
 function initFooterYear() {
   const el = document.getElementById("footer-year");
   if (el) el.textContent = new Date().getFullYear();
@@ -39,9 +47,9 @@ function initFooterYear() {
 const CHAT_FAQS = [
   { question: "¿Qué servicios ofrecen?", answer: "Ofrecemos contabilidad y finanzas, servicios tributarios, gestión de nómina, asesoría financiera y organización empresarial. Puedes ver el detalle completo en la sección Servicios de esta página." },
   { question: "¿Atienden fuera de Santo Domingo?", answer: "Sí, ofrecemos atención presencial y virtual en toda República Dominicana." },
-  { question: "¿Cómo pido el diagnóstico gratis?", answer: "Hacé clic en cualquier botón \"Quiero mi diagnóstico gratis\" de la página, completá tus datos y te contactamos por WhatsApp para coordinarlo." },
+  { question: "¿Cómo pido el diagnóstico gratis?", answer: "Haz clic en cualquier botón \"Quiero mi diagnóstico gratis\" de la página, completa tus datos y te contactamos por WhatsApp para coordinarlo." },
   { question: "¿Trabajan con empresas pequeñas o independientes?", answer: "Sí, trabajamos con negocios de todos los tamaños, incluyendo profesionales independientes y pequeñas empresas." },
-  { question: "¿Cómo los contacto directamente?", answer: "Podés escribirnos por WhatsApp en cualquier momento usando el botón de esta ventana o los que aparecen en toda la página." }
+  { question: "¿Cómo los contacto directamente?", answer: "Puedes escribirnos por WhatsApp en cualquier momento usando el botón de esta ventana o los que aparecen en toda la página." }
 ];
 
 function renderChatMenu() {
@@ -96,6 +104,7 @@ function initHeroCarousel() {
 
 document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
+  initHeaderScroll();
   initFaqAccordion();
   initFooterYear();
   initChatWidget();

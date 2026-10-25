@@ -1,29 +1,123 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-DO">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shalom Financial & Accounting | Contabilidad y Finanzas en República Dominicana</title>
-<meta name="description" content="Contabilidad, impuestos, nómina y asesoría financiera para tu negocio en República Dominicana. Solicita tu diagnóstico contable gratis.">
+<title>Contabilidad e Impuestos en República Dominicana | Shalom</title>
+<meta name="description" content="Contabilidad, impuestos DGII, nómina y asesoría financiera para tu negocio en República Dominicana. Pide tu diagnóstico contable gratis.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Shalom Financial & Accounting">
 <link rel="icon" href="images/logo.png" type="image/png">
 <meta name="theme-color" content="#0A1A3C">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_DO">
 <meta property="og:site_name" content="Shalom Financial & Accounting">
-<meta property="og:title" content="Shalom Financial & Accounting | Contabilidad y Finanzas en República Dominicana">
-<meta property="og:description" content="Contabilidad, impuestos, nómina y asesoría financiera para tu negocio en República Dominicana. Solicita tu diagnóstico contable gratis.">
+<meta property="og:title" content="Contabilidad e Impuestos en República Dominicana | Shalom">
+<meta property="og:description" content="Contabilidad, impuestos DGII, nómina y asesoría financiera para tu negocio en República Dominicana. Pide tu diagnóstico contable gratis.">
 <meta name="twitter:card" content="summary">
 <!-- Pendiente: al tener dominio definitivo, agregar <link rel="canonical"> y og:image/og:url con URLs absolutas -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "AccountingService",
+  "@type": [
+    "AccountingService",
+    "ProfessionalService"
+  ],
   "name": "Shalom Financial & Accounting",
-  "description": "Contabilidad, impuestos, nómina y asesoría financiera para negocios en República Dominicana.",
+  "description": "Contabilidad, impuestos (DGII, ITBIS, ISR), nómina y asesoría financiera para negocios y profesionales en República Dominicana.",
   "email": "financialshalom51@gmail.com",
   "telephone": "+18494836468",
-  "areaServed": { "@type": "Country", "name": "República Dominicana" },
-  "inLanguage": "es"
+  "logo": "images/logo.png",
+  "image": "images/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "DO"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "República Dominicana"
+  },
+  "knowsLanguage": "es",
+  "sameAs": [
+    "https://www.instagram.com/shalomfinancial51/",
+    "https://www.facebook.com/share/1KyWsxzmXj/",
+    "https://www.linkedin.com/posts/shalom-financial-and-accounting_finanzas-contabilidad-emprendedores-activity-7501025875232980992-NYAT"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Planes de formalización",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Plan Emprendedor"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Plan Empresarial"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Plan Integral"
+        }
+      }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué documentos necesito para empezar a trabajar con ustedes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En este caso, preferiblemente llenar un formulario y solicitar una reunión física o virtual, o coordinar una cita previa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Atienden fuera de Santo Domingo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, ofrecemos atención presencial y virtual en toda República Dominicana."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Trabajan con negocios pequeños o profesionales independientes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, trabajamos con negocios de todos los tamaños, incluyendo profesionales independientes y pequeñas empresas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo solicito el diagnóstico contable gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Haz clic en cualquier botón \"Quiero mi diagnóstico gratis\" de esta página, completa tus datos y te contactamos por WhatsApp para coordinarlo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta una consulta inicial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El diagnóstico contable inicial es completamente gratuito. Los costos de servicios continuos se cotizan según las necesidades específicas de tu negocio."
+      }
+    }
+  ]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,11 +133,13 @@
     </a>
     <nav class="main-nav" id="main-nav">
       <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
       <a href="#sobre-nosotros">Sobre Nosotros</a>
       <a href="#testimonios">Testimonios</a>
       <a href="#faq">FAQ</a>
       <a href="#contacto">Contacto</a>
     </nav>
+    <button class="btn btn-primary header-cta" id="header-diagnostic-btn" type="button">Diagnóstico gratis</button>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -61,8 +157,8 @@
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <h1>Números que organizan, decisiones que <span class="text-gold">hacen crecer</span> tu negocio.</h1>
-        <p class="hero-subtitle">Contabilidad, impuestos, nómina y asesoría financiera para tu negocio en República Dominicana — atención presencial y virtual.</p>
+        <h1>Contabilidad e impuestos en República Dominicana: <span class="text-gold">números que organizan</span>, decisiones que hacen crecer tu negocio.</h1>
+        <p class="hero-subtitle">Contabilidad, declaraciones a la DGII, nómina y asesoría financiera para emprendedores, profesionales y empresas — atención presencial y virtual.</p>
         <div class="hero-actions">
           <button class="btn btn-primary" id="hero-diagnostic-btn" type="button">Quiero mi diagnóstico gratis</button>
         </div>
@@ -74,21 +170,23 @@
             <img class="hero-slide-fg" src="images/hero-1.jpg" alt="Shalom Financial & Accounting — soluciones contables y financieras para el crecimiento de tu negocio">
           </div>
           <div class="hero-slide">
-            <img class="hero-slide-bg" src="images/hero-2.jpg" alt="" aria-hidden="true">
-            <img class="hero-slide-fg" src="images/hero-2.jpg" alt="Shalom Financial & Accounting — la solución que tu negocio necesita">
+            <img class="hero-slide-bg" src="images/hero-2.jpg" alt="" aria-hidden="true" loading="lazy">
+            <img class="hero-slide-fg" src="images/hero-2.jpg" loading="lazy" alt="Shalom Financial & Accounting — la solución que tu negocio necesita">
           </div>
           <div class="hero-slide">
-            <img class="hero-slide-bg" src="images/hero-3.jpg" alt="" aria-hidden="true">
-            <img class="hero-slide-fg" src="images/hero-3.jpg" alt="Shalom Financial & Accounting — tu éxito es también nuestro éxito">
+            <img class="hero-slide-bg" src="images/hero-3.jpg" alt="" aria-hidden="true" loading="lazy">
+            <img class="hero-slide-fg" src="images/hero-3.jpg" loading="lazy" alt="Shalom Financial & Accounting — tu éxito es también nuestro éxito">
           </div>
           <div class="hero-slide">
-            <img class="hero-slide-bg" src="images/hero-4.jpg" alt="" aria-hidden="true">
-            <img class="hero-slide-fg" src="images/hero-4.jpg" alt="Shalom Financial & Accounting — tú te enfocas en hacer crecer tu negocio, nosotros resolvemos el resto">
+            <img class="hero-slide-bg" src="images/hero-4.jpg" alt="" aria-hidden="true" loading="lazy">
+            <img class="hero-slide-fg" src="images/hero-4.jpg" loading="lazy" alt="Shalom Financial & Accounting — tú te enfocas en hacer crecer tu negocio, nosotros resolvemos el resto">
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
 
   <section class="services" id="servicios">
     <div class="container">
@@ -146,13 +244,71 @@
       </div>
     </div>
   </section>
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
+
+  <section class="plans" id="planes">
+    <div class="container">
+      <h2>Planes de formalización para tu negocio</h2>
+      <p class="plans-intro">Elige el acompañamiento que se ajusta a la etapa de tu negocio. Cada plan se cotiza según tu caso: escríbenos y te enviamos la propuesta.</p>
+      <div class="plans-grid">
+        <article class="plan-card">
+          <span class="plan-tag">Shalom Emprende</span>
+          <h3>Plan Emprendedor</h3>
+          <ul>
+            <li>Orientación inicial y preparación documental base.</li>
+            <li>Constitución de sociedad simple o formalización de persona física.</li>
+            <li>RNC ante la DGII.</li>
+            <li>Nombre Comercial opcional.</li>
+            <li>Comprobantes fiscales básicos.</li>
+          </ul>
+          <p class="plan-note">No incluye tasas oficiales ni honorarios de otros profesionales.</p>
+          <a class="btn btn-primary plan-cta" href="https://wa.me/18494836468?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Plan%20Emprendedor%20de%20Shalom%20Financial%20%26%20Accounting." target="_blank" rel="noopener">Solicitar este plan</a>
+        </article>
+        <article class="plan-card plan-card--featured">
+          <span class="plan-tag">Shalom Company</span>
+          <h3>Plan Empresarial</h3>
+          <ul>
+            <li>Todo lo del Plan Emprendedor.</li>
+            <li>Registro Mercantil ante la Cámara de Comercio y Producción.</li>
+            <li>Documentación societaria completa.</li>
+            <li>Organización de libros sociales.</li>
+            <li>Parametrización inicial.</li>
+          </ul>
+          <p class="plan-note">Ajustable a la complejidad de tu negocio.</p>
+          <a class="btn btn-primary plan-cta" href="https://wa.me/18494836468?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Plan%20Empresarial%20de%20Shalom%20Financial%20%26%20Accounting." target="_blank" rel="noopener">Solicitar este plan</a>
+        </article>
+        <article class="plan-card">
+          <span class="plan-tag">Shalom Pro+</span>
+          <h3>Plan Integral</h3>
+          <ul>
+            <li>Todo lo del Plan Empresarial.</li>
+            <li>Acompañamiento más robusto en el proceso.</li>
+            <li>Orientación en signos distintivos.</li>
+            <li>Orientación sobre facturación electrónica.</li>
+            <li>Mayor alcance documental y administrativo.</li>
+          </ul>
+          <p class="plan-note">Ideal para formalizaciones más completas.</p>
+          <a class="btn btn-primary plan-cta" href="https://wa.me/18494836468?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Plan%20Integral%20de%20Shalom%20Financial%20%26%20Accounting." target="_blank" rel="noopener">Solicitar este plan</a>
+        </article>
+      </div>
+      <div class="plans-custom">
+        <h3>¿Necesitas algo a la medida?</h3>
+        <p>También diseñamos planes de iguala y servicios personalizados según la etapa de tu negocio, tu complejidad operativa, tus obligaciones fiscales y la frecuencia de trabajo que necesites. <strong>Cotización personalizada.</strong></p>
+        <a class="btn btn-whatsapp" href="https://wa.me/18494836468?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20personalizada%20con%20Shalom%20Financial%20%26%20Accounting." target="_blank" rel="noopener">Pedir cotización por WhatsApp</a>
+      </div>
+      <p class="plans-legal">Los honorarios corresponden a Shalom Financial &amp; Accounting y no incluyen tasas ni pagos oficiales ante la DGII, la oficina nacional de signos distintivos o la Cámara de Comercio y Producción.</p>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
+
   <section class="about" id="sobre-nosotros">
     <div class="container">
       <h2>Sobre Nosotros</h2>
       <p class="about-intro">Shalom Financial & Accounting es una firma dominicana especializada en contabilidad, impuestos y asesoría financiera, con vasta experiencia en asesoría contable, financiera y gestión fiscal acompañando negocios de todos los tamaños a poner en orden sus finanzas y cumplir con sus obligaciones fiscales. Nuestro equipo combina conocimiento técnico y atención cercana para que cada cliente tome decisiones con confianza, de forma presencial o virtual.</p>
       <div class="team-grid">
         <div class="team-card">
-          <img src="images/julissa.jpg" alt="Julissa Fernández, CEO de Shalom Financial & Accounting" class="team-photo">
+          <img src="images/julissa.jpg" alt="Julissa Fernández, CEO de Shalom Financial & Accounting" class="team-photo" loading="lazy">
           <h3>Julissa Fernández</h3>
           <p class="team-role">CEO</p>
         </div>
@@ -175,6 +331,8 @@
     </div>
   </section>
 
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
+
   <section class="diagnostic-banner" id="diagnostico">
     <div class="container diagnostic-inner">
       <h2>¿Tu contabilidad tiene áreas de mejora?</h2>
@@ -182,6 +340,8 @@
       <button class="btn btn-primary" id="banner-diagnostic-btn" type="button">Quiero mi diagnóstico gratis</button>
     </div>
   </section>
+
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
 
   <section class="why-us" id="por-que-elegirnos">
     <div class="container">
@@ -195,6 +355,8 @@
       </div>
     </div>
   </section>
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
+
   <section class="testimonials" id="testimonios">
     <div class="container">
       <h2>Testimonios</h2>
@@ -217,6 +379,8 @@
       </div>
     </div>
   </section>
+
+  <div class="section-divider" aria-hidden="true"><span></span><img src="images/logo.png" alt="" loading="lazy" width="44" height="44"><span></span></div>
 
   <section class="faq" id="faq">
     <div class="container">
@@ -279,11 +443,10 @@
     </div>
     <div class="footer-social">
       <h4>Síguenos</h4>
-      <!-- Reemplazar "#" por las URLs reales de las redes sociales de Shalom -->
       <div class="social-links">
-        <a href="#">Facebook</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+        <a href="https://www.facebook.com/share/1KyWsxzmXj/" target="_blank" rel="noopener me" aria-label="Facebook de Shalom Financial &amp; Accounting">Facebook</a>
+        <a href="https://www.instagram.com/shalomfinancial51/" target="_blank" rel="noopener me" aria-label="Instagram de Shalom Financial &amp; Accounting">Instagram</a>
+        <a href="https://www.linkedin.com/posts/shalom-financial-and-accounting_finanzas-contabilidad-emprendedores-activity-7501025875232980992-NYAT" target="_blank" rel="noopener me" aria-label="LinkedIn de Shalom Financial &amp; Accounting">LinkedIn</a>
       </div>
     </div>
   </div>
