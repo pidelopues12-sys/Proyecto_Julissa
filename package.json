@@ -5,7 +5,7 @@
   "type": "module",
   "engines": { "node": ">=18" },
   "scripts": {
-    "test": "node --test lib/diagnostico-core.test.js lib/diagnostico-handler.test.js"
+    "test": "node --test lib/diagnostico-core.test.js lib/diagnostico-handler.test.js lib/rate-limit.test.js"
   },
   "dependencies": {
     "openai": "^4.0.0"
