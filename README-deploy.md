@@ -1,15 +1,16 @@
 # Despliegue en Vercel — Diagnóstico con IA
 
-Este sitio ahora incluye una función serverless (`api/diagnostico.js`). Debe
+Este sitio incluye una función serverless (`api/diagnostico.js`). Debe
 desplegarse como **proyecto Vercel estándar** (no como salida pre-construida),
 para que Vercel detecte la carpeta `api/` y ejecute la función.
 
 ## Variables de entorno (Vercel → Project → Settings → Environment Variables)
-- `NVIDIA_API_KEY` = (tu clave de NVIDIA; **rotarla** si se expuso)
-- `NVIDIA_BASE_URL` = `https://integrate.api.nvidia.com/v1`
-- `NVIDIA_MODEL` = `openai/gpt-oss-20b`
+- `GROQ_API_KEY` = (tu clave de Groq; **rotarla** si se expuso)
 
-Definirlas para Production y Preview. NO subir `.env` a git (ya está ignorado).
+La base URL (`https://api.groq.com/openai/v1`) y el modelo (`openai/gpt-oss-20b`)
+están fijos en `api/diagnostico.js`; no hace falta configurarlos.
+
+Definirla para Production y Preview. NO subir `.env` a git (ya está ignorado).
 
 ## Configuración del proyecto
 - Framework Preset: **Other**
